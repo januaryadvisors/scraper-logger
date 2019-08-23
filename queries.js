@@ -25,8 +25,8 @@ const scraperStart = (request, response) => {
 }
 
 const scraperEnd = (request, response) => {
-  const { end_time, status, id } = request.body
-  pool.query('UPDATE scraper_log SET end_time = ($1), status = ($2) WHERE id = ($3)', [end_time, status, id], (error, results) => {
+  const { end_time, status, id, full_log } = request.body
+  pool.query('UPDATE scraper_log SET end_time = ($1), status = ($2), full_log = ($3) WHERE id = ($4)', [end_time, status, full_log, id], (error, results) => {
     if (error) {
       throw error
     }
