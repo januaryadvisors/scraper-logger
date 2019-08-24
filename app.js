@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const db = require('./queries')
-const port = process.env.PORT || '8080'
+const db = require('./routes/index.js')
+const port = process.env.PORT || '3000'
 
+app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -11,10 +12,7 @@ app.use(
   })
 )
 
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
-})
-
+app.get('/', db.getScraperLog)
 app.post('/start', db.scraperStart)
 app.post('/end', db.scraperEnd)
 

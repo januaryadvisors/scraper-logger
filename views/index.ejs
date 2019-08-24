@@ -1,0 +1,64 @@
+<% include header.ejs %>
+    <div class="container">
+        <h1 class="display-4 text-primary">Scraper Logs</h1>
+
+        <% if (logs.length > 0) {%>
+            <div class="row bg-primary text-white">
+                <div class="col"><h5>Scraper Name</h5></div>
+                <div class="col"><h5>Start Time</h5></div>
+                <div class="col"><h5>End Time</h5></div>
+                <div class="col"><h5>Status</h5></div>
+                <div class="col"></div>
+            </div>
+            <% logs.forEach((log, index) => { %>
+                <div class="row border-bottom border-primary my-3" border-primary">
+                    <div class="col"><%= log.name %></div>
+                    <div class="col"><%= log.start_time %></div>
+                    <div class="col"><%= log.end_time %></div>
+                    <div class="col"><%= log.status %></div>
+                    <div class="col">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#index<%= index %>" aria-expanded="false" aria-controls="index<%= index %>">
+                        View Full Logs
+                      </button>
+                    </div>
+                </div>
+                <div class="collapse" id="index<%= index %>">
+                    <div class="card card-body" style="white-space: pre-wrap">
+                        <%= log.full_log %>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class="text-center">No logs found.</p>
+        <% } %>
+    </div>
+
+
+
+<!-- <% if (logs.length > 0) {%>
+    <div class="container-fluid">
+        <% logs.forEach((log, index) => { %>
+            <div class="row">
+                <div class="col-md-4"><%= log.name %></div>
+                <div class="col-md-4"><%= log.start_time %></div>
+                <div class="col-md-4"><%= log.end_time %></div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="<%= index %>">
+                      View Full Log
+                    </button>
+                </div>
+                <div class="collapse" id="<%= index %>">
+                  <div class="well">
+                    <%= log.full_log %>
+                  </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p class="text-center">No logs found.</p>
+<% } %> -->
+    
+</div>
+</body>
+</html>

@@ -11,6 +11,17 @@ const pool = new Pool({
   //port: 5432,
 })
 
+const getScraperLog = (request, response) => {
+  pool.query('SELECT * FROM scraper_log ORDER BY start_time DESC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    console.log(results)
+    response.render('index.ejs',{
+      logs: results.rows
+    })
+  })
+}
 
 const scraperStart = (request, response) => {
   console.log(request.body)
@@ -35,6 +46,7 @@ const scraperEnd = (request, response) => {
 }
 
 module.exports = {
+  getScraperLog,
   scraperStart,
   scraperEnd
 }
